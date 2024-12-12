@@ -30,7 +30,7 @@
             <p><span class="description-recipe">Cooking Time: {{ recipe.cooking_time }}</span></p>
             <!-- recipe ingredients -->
             <div class="ingredients">
-              <p><span class="description-recipe">Ingredients:{{ recipe.ingredients }}</span></p>
+              <p><span class="description-recipe">Ingredients:</span></p>
               <ul>
                 {% for ingredient in recipe.ingredients|split_by_comma %}
             <li>{{ ingredient }}</li>
@@ -39,17 +39,13 @@
             </div>
             <p>
               <span class="description-recipe"
-                >Instructions: Slice the tomatoes and mozzarella cheese into
-                even slices. Arrange the tomato and mozzarella slices on a
-                plate, alternating with basil leaves. Drizzle balsamic glaze
-                over the top. Season with salt and pepper to taste.</span
-              >
+                >Instructions: {{recipe.instructions}}</span>
             </p>
           </div>
 
           <!-- Edit/Delete buttons -->
           <div class="buttons">
-            <a href="#" class="edit-button">Edit</a>
+            <a href="{% url 'recipe-edit' recipe.id %}" class="edit-button">Edit</a>
             <a href="#" class="delete-button">Delete</a>
           </div>
         </div>
