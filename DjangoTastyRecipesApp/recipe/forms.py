@@ -1,5 +1,6 @@
 from django import forms
 
+from DjangoTastyRecipesApp.mixins import ReadOnlyMixin
 from recipe.models import Recipe
 
 
@@ -21,3 +22,7 @@ class RecipeCreateForm(RecipeBaseForm):
 
 class RecipeEditForm(RecipeBaseForm):
     pass
+
+
+class RecipeDeleteForm(ReadOnlyMixin, RecipeBaseForm):
+    read_only_fields = ['title', 'cuisine_type', 'ingredients', 'instructions', 'cooking_time', 'image_url']

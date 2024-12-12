@@ -1,8 +1,8 @@
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView, UpdateView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
 from DjangoTastyRecipesApp.utility import get_user_obj
-from recipe.forms import RecipeCreateForm, RecipeEditForm
+from recipe.forms import RecipeCreateForm, RecipeEditForm, RecipeDeleteForm
 from recipe.models import Recipe
 
 
@@ -37,3 +37,17 @@ class RecipeEditView(UpdateView):
     success_url = reverse_lazy('catalogue')
     form_class = RecipeEditForm
     pk_url_kwarg = 'recipe_id'
+
+
+class RecipeDeleteView(DeleteView):
+    model = Recipe
+    template_name = 'delete-recipe.html'
+    form_class = RecipeDeleteForm
+    success_url = reverse_lazy('catalogue')
+    pk_url_kwarg = 'recipe_id'
+
+    def get_initial(self):
+        return self.object.__dict__
+
+    def form_invalid(self, form):
+        return super().form_valid(form)
