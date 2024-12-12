@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
+    {% load get_user %}
+    {% load static %}
 
       <!-- profile details section -->
       <section id="recipe-details">
@@ -9,27 +11,38 @@
             <!-- default profile image -->
             <!-- if the user is not a chef - a default image - no_chef_img.png -->
             <!-- if the user is a chef - a default image - chef_img.png -->
-
-            <img
+              {% get_user as profile %}
+              {% if profile.chef %}
+                  <img
               class="recipe-img"
-              src="/static/images/chef_img.png"
+              src="{% static 'images/chef_img.png' %}"
               alt="profile-image"
             />
+                  {% else %}
+                  <img
+              class="recipe-img"
+              src="{% static 'images/no_chef_img.png' %}"
+              alt="profile-image"
+            />
+              {% endif %}
+          
 
             <!-- profile full name -->
             <h1>Fname Lname</h1>
 
             <!-- profile nickname -->
-            <p class="description">Nickname: testuser</p>
+            <p class="description">Nickname:{{ object.nickname }}</p>
 
             <!-- profile bio -->
             <!-- if no profile bio - display 'N/A' -->
-
-            <p class="description">Bio: N/A</p>
-
+            {% if profile.bio %}
+                {{ profile.bio }}
+            {% else %}
+                <p class="description">Bio: N/A</p>
+            {% endif %}
             <!-- total number of published recipes -->
-            <p class="description">Published recipes: 3</p>
-
+            <p class="description">Published recipes: {{ object.recipe_set.count }}</p>
+            
             <!-- Edit/Delete buttons -->
             <div class="buttons">
               <a href="#" class="edit-button">Edit</a>
