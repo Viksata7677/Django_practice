@@ -1,8 +1,8 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, UpdateView
 
 from DjangoTastyRecipesApp.utility import get_user_obj
-from profiles.forms import ProfileCreateForm
+from profiles.forms import ProfileCreateForm, ProfileEditForm
 from profiles.models import Profile
 
 
@@ -19,6 +19,16 @@ class ProfileCreateView(CreateView):
 class ProfileDetailView(DetailView):
     model = Profile
     template_name = 'details-profile.html'
+
+    def get_object(self, queryset=None):
+        return get_user_obj()
+
+
+class ProfileEditView(UpdateView):
+    model = Profile
+    template_name = 'edit-profile.html'
+    form_class = ProfileEditForm
+    success_url = reverse_lazy('profile-details')
 
     def get_object(self, queryset=None):
         return get_user_obj()

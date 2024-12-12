@@ -11,3 +11,8 @@ class ProfileBaseForm(forms.ModelForm):
 
 class ProfileCreateForm(ProfileBaseForm):
     pass
+
+
+class ProfileEditForm(ProfileBaseForm):
+    class Meta(ProfileBaseForm.Meta):
+        fields = ProfileBaseForm.Meta.fields + ('bio',)

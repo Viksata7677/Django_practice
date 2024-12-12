@@ -25,7 +25,7 @@
               alt="profile-image"
             />
               {% endif %}
-          
+
 
             <!-- profile full name -->
             <h1>Fname Lname</h1>
@@ -42,10 +42,10 @@
             {% endif %}
             <!-- total number of published recipes -->
             <p class="description">Published recipes: {{ object.recipe_set.count }}</p>
-            
+
             <!-- Edit/Delete buttons -->
             <div class="buttons">
-              <a href="#" class="edit-button">Edit</a>
+              <a href="{% url 'profile-edit' %}" class="edit-button">Edit</a>
               <a href="#" class="delete-button">Delete</a>
             </div>
           </div>
