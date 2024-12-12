@@ -36,7 +36,7 @@
             <!-- profile bio -->
             <!-- if no profile bio - display 'N/A' -->
             {% if profile.bio %}
-                {{ profile.bio }}
+                <p class="description">Bio: {{ profile.bio }}</p>
             {% else %}
                 <p class="description">Bio: N/A</p>
             {% endif %}
