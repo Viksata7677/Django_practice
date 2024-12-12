@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
 
 from DjangoTastyRecipesApp.utility import get_user_obj
 from recipe.forms import RecipeCreateForm
@@ -23,3 +23,9 @@ class CreateRecipeView(CreateView):
     def form_valid(self, form):
         form.instance.author = get_user_obj()
         return super().form_valid(form)
+
+
+class RecipeDetailView(DetailView):
+    model = Recipe
+    template_name = 'details-recipe.html'
+    pk_url_kwarg = 'recipe_id'

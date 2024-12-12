@@ -3,7 +3,7 @@
     {% load static %}
 {% load get_user %}
 {% get_user as profile %}
-    
+
     {% if profile %}
         {% if recipe_list %}
             {% for recipe in recipe_list %}
@@ -14,10 +14,10 @@
               <div class="image-wrap">
                 <!-- recipe image -->
                 <!-- if there is no image url provided, display the default recipe image -->
-                {% if image_url %}
-                    {{ recipe.image_url }}
+                {% if recipe.image_url %}
+                    <img src="{{ recipe.image_url }}" alt="Cover Image"/>
                   {% else %}
-                  
+
                     <img
                       class="recipe-img"
                       src="{% static 'images/default_recipe_img.png' %}"
@@ -33,7 +33,7 @@
               <h1>{{ recipe.instructions|slice:":35" }}</h1>
               <div class="details-buttons">
                 <!-- recipe details button -->
-                <a href="#" class="details-btn">Details</a>
+                <a href="{% url 'recipe-details' recipe.id %}" class="details-btn">Details</a>
               </div>
             </div>
             {% endfor %}
